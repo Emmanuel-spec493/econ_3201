@@ -1,0 +1,72 @@
+---
+title: "LAB 3"
+format: pdf
+editor: visual
+bibliography: ref.bib
+csl:nature.csl
+---
+
+# section Heading
+
+## Subsection Heading
+
+### sub-subsection Heading
+
+*italics* **italics**
+
+'code'
+
+[links](lclair.ca)
+
+### unordered list
+
+-   Item 1
+-   Item 2
+    -   Item 2a
+    -   Item 2b
+
+### Ordered list
+
+1.  Item 1
+
+2.  Item 3
+
+3.  Item 2
+
+    -   Item 3b
+
+    -   Item 3a
+
+    -   Inline Math: $y=mx+b$ is my regression of y on x
+
+    -Display Math: $$y=mx+b$$
+
+    -   Fractions: $\frac{a}{b}$
+
+    -   Subscript: $x_1$
+
+    -   superscript: $x_{1}^2$
+
+        Summation : $$\sum_{i=1}^N$$
+
+        -   Greek letters: $\alpha$ , $\beta$ ,
+
+
+```{r}
+1+1
+```
+
+```{r}
+y <- c(1,2,3,4,5)
+y
+```
+```{r}
+a <- c(3,4,5,6)
+```
+
+sequence
+
+```{r}
+z <- seq(from = -7,to = 20 , by = 2)
+```
+
