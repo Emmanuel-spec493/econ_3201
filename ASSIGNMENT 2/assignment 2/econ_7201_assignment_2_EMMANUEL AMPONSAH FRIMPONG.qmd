@@ -155,7 +155,7 @@ se_White <- sqrt(diag(V_White))
 
 ```
 
-(se_White) of $\beta_{2}$ = 0.03294644
+(se_White) of $\beta_{2}$ = 0.4529172 
 
 ```{r}
 # Comparing se_White and se of beta_2
