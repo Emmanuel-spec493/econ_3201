@@ -294,17 +294,15 @@ Subset the data to include only observations from 2008. Search `?subset` in the 
   plot(df_2008$cty, df_2008$hwy, xlab = "city mpg (cty)" , ylab = "highway mpg (hwy)",col ="blue" )
 ```
 
-```         
 (i) Change the x-axis label using the option `xlab = "City MPG"` and change the y-axis label using the option `ylab = "Highway MPG"`. 
-```
+
 
 ```{r}
  plot(df_2008$cty, df_2008$hwy, xlab = "City MPG (cty)" , ylab = "Highway MPG (hwy)" , col = "blue")
 ```
 
-```         
+        
 (ii) Add the caption "City Versus Highway Fuel Efficiency (MPG)"
-```
 
 ```{r}
    plot(df_2008$cty, df_2008$hwy,
@@ -313,21 +311,19 @@ Subset the data to include only observations from 2008. Search `?subset` in the 
      main = "City versus Highway fuel Efficiency (MPG)", ,col = "blue")
 ```
 
-```         
-(iii) Cross reference the figure and add the text "Figure 1 shows the fuel efficiency for city driving versus highway driving".
-```
+(iii) Cross reference the figure and add the text "Figure 1 shows the fuel efficiency for city driving versus highway driving"
 
 ```{r}
-   plot(df_2008$cty, df_2008$hwy,
-     xlab = "City MPG (cty)",
-     ylab = "Highway MPG (hwy)",
-     main = "City versus Highway fuel Efficiency (MPG)" , col = "blue")
+#| eval: true
+#| label: fig-1
+
 plot(df_2008$cty, df_2008$hwy,
      xlab = "City MPG (cty)",
      ylab = "Highway MPG (hwy)",
      main = "City versus Highway Fuel Efficiency (MPG)",
      col = "blue")
 
-mtext("Figure 1 Shows the Fuel Efficiency for City Driving versus Highway Driving",
-      side = 1, line = 4, cex = 0.7)  
 ```
+
+@fig-1 shows the fuel efficiency for city driving versus highway driving"
+
