@@ -17,7 +17,7 @@ format:
         }
         \pagestyle{style2}
 execute: 
-  eval: false
+  eval: true
   echo: true
 ---
 
@@ -241,18 +241,87 @@ data <- data.frame(Y, D, X)
 
 1. (**5 pts**) Compute the difference in average outcomes between treated and untreated. Interpret the result in terms of potential bias. 
 
+
+```{r}
+df <- data.frame(Y,D,X)
+Mean_T <- mean(data$Y[data$D == 1])
+Mean_NT <- mean(data$Y[data$D == 0])
+Diff_mean <- Mean_T - Mean_NT
+print(Diff_mean)
+```
+The mean difference is 3.738. But the true treatment effect is 3.00  . The estimate is upward biased because of selection bias. The selection of the treated group accounts for the upward bias in Y. The treated group have higher X values which increases Y. 
+
 2. (**5 pts**)
     (a) Estimate the treatment effect controlling for (X):
 $$
 Y_i = \alpha + \tau D_i + \beta X_i + \varepsilon_i
 $$
-    (b) Compare the estimate of (\tau) to the true treatment effect of 3.
+```{r}
+ols <- lm(Y ~ D + X, data = data)
+```
+Coefficient of D is 2.9
 
+Therefore Estimated treatment effect = 2.9
+ 
+
+
+
+    (b) Compare the estimate of (\tau) to the true treatment effect of 3.
+    
+**Ans**
+
+Comparison
+
+Estimated treatment effect = 2.9
+ The true value of Average Treatment Effect =3.0
+ 
+ Interpretation
+ 
+ The estimate is very close to the true value after we control for X and bias goes away.
+ 
+ Ols helps us to account for selection on observables without bias
+ 
+ 
 3. (**5 pts**) Propensity Score Matching 
     (a) Estimate treatment effects using matching. Search `?matchIt` in the console 
+    
+    **Ans**
+```{r}
+m.full <- matchit(D ~ X, data = df, method = "full")
+```
+    
+summary(m.full)
+
+Std. Mean Diff. (before matching):
+distance: 1.3664
+X:        1.2878
+These values means the treated and control units are different before matching .ie. strong selection on X.
+
+Std. Mean Diff. (After matching):
+distance: 0.0060
+X:        0.0341
+Both standardized mean differences dropped  below 0.1.
+Matching improved the covariate balance
+
+
+```{r}
+matched_data <- match.data(m.full)
+matched_model <- lm(Y ~ D + X, data = matched_data, weights = weights )
+```
+
+summary(matched_model)
+    
     (b) Compare the matched estimate to OLS and the naïve difference.
 
+The OLS estimator is 2.9
+The estimate from the matching treatment is 3.088 
+The naive difference is 3.738
 
+The treatment effect after matching is close to the ols estimate 3.08 and 2.9 respectively. All these two estimates are close to the true mean of 3.00.
+
+However, the naive difference is 3.738. which is biased upward, since the treated units have higher X
+
+ 
 4. (**5 pts**) Simulate a violation of the Conditional Independence Assumption by introducing an unobserved confounder ( U_i ):
 
 ```{r}
@@ -265,7 +334,28 @@ bias_model <- lm(Y ~ D + X, data = data.frame(Y, D, X))
 summary(bias_model)
 ```
 
+
+**Ans**
+The estimate for D is 3.678. This is upwardly biased from the true estimate of 3. This happens because treated units also have higher unobserved $U_{i}$ which makes them both more likely to be treated and to have higher outcomes even without treatment.
+
+Y0 depends on both X and U.
+
+Y1 is Y0 plus a treatment effect of 3 plus an extra dependence on X.
+
+True ATE is 3 (ignoring the X part) for an item with X = 0.
+
+
 Visualize and discuss how this unobserved confounder biases the estimated treatment effect.
+
+**Ans**
+Red points = treated units (D =1)
+Blue points = untreated units (D = 0)
+
+U affects both D and Y. The (red) units cluster higher on the 
+Y-axis even when X is the same.
+At the same level of X, treated items have higher average outcomes-not purely because of the treatment but also because of the unobserved $U_{i}$ correlated with both.
+
+Because $U_{i}$ affects both the probability of treatment and the potential outcomes, the Conditional Independence Assumption (CIA) fails
 
 ```{r}
 plot(X, Y, col = ifelse(D==1, "red", "blue"), pch = 16,
