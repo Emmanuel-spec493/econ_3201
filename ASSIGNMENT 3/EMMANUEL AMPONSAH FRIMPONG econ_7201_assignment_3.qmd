@@ -2,6 +2,7 @@
 title: |
   | ECON 7201
   | Applied Econometrics
+  Emmanuel
 subtitle: "Assignment 3"
 format: 
   pdf:
@@ -17,7 +18,7 @@ format:
         }
         \pagestyle{style2}
 execute: 
-  eval: true
+  eval: false
   echo: true
 ---
 
@@ -103,12 +104,12 @@ The Stable Unit Treatment Value Assumption states that, the potential outcomes o
 3. (**5 pts**) What is the **Conditional Independence Assumption (CIA)**?  Write it formally and explain its meaning in words.
 
 **Ans**.
-Conditional Independence Assumption (CIA)  means that after controlling for all relevant observed factors, the assignment of individuals to the treatment or control group is unrelated to what their outcomes would be in either case.
+Conditional Independence Assumption (CIA)  means that after controlling for all relevant observed factors, the assignment of individuals to the treatment or control group is unrelated to what their outcomes would be in either case.They are equal as randomisation
 
 It is written formally as 
 $(Y_{oi},Y_{1i})$  ⊥ $c_{i}|X_{i}$
 
-This means that after controlling for X,the treatment assignment is as good asrandom-the treated and untreated groups are comparable in expectation. 
+This means that after controlling for X,the treatment assignment is as good as random-the treated and untreated groups are comparable in expectation. 
 
 
 
@@ -124,8 +125,9 @@ for every combination of observed characteristics
 $X_{i}$ ,
 $D_{i}$ = 1 if an individual receives treatment 
 
-$D_{i}$ = 0 if an individual does not receive treatment
+$D_{i}$ = 0 if an individual does not receive treatment.
 
+This helps comparison and causal inference.
 
 
 5. (**5 pts**) Explain why the **Average Treatment Effect on the Treated (ATT)** may differ from the **Average Treatment Effect (ATE)**.
